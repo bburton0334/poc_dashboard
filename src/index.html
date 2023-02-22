@@ -45,7 +45,12 @@
             <div class="selected-tab" ng-switch="tab">
                 <div ng-switch-when="1">
                     <h2>Monitoring</h2>
-                    <p>Monitoring Section</p>
+                    <p>
+                    Select motor to view data for:
+                    <select name="motors" id="motorIDSelector">
+                        <option value="0">0</option>
+                    </select>
+                    </p>
                     <iframe class="graph-1-frame" id="grafanaIframe" src="http://localhost:3000/d-solo/ppvZM5JVk/test-dashboard?orgId=1&from=1676403806291&to=1676425406291&panelId=2" class="graph-1-frame"></iframe>
                 </div>
                 <div ng-switch-when="2">
