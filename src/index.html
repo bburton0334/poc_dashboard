@@ -9,10 +9,12 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>             
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>    
+        <meta name="referrer" content="no-referrer-when-downgrade">
     </head>
     <body ng-app="MyApp">
-
+        <script src="https://accounts.google.com/gsi/client" asycn defer></script>
         <div id="main" ng-app>
             <nav class="{{cssclass}}">
                 <!-- Brand/logo -->
@@ -22,6 +24,20 @@
                 <a href="#" class="home a-with-hover" ng-click="data='home...';active=true;cssclass='home'">HOME</a>
                 <a href="#" class="clients a-with-hover" ng-click="data='clients...';active=true;cssclass='clients'">CLIENTS</a>
             </nav>
+        </div>
+
+        <div id="g_id_onload"
+             data-client_id="648073497353-ev4h38c3hpk9ov6hf9vrbdb1mtk9me1d.apps.googleusercontent.com"
+             data-context="signin"
+             data-callback="handleCredentialsResponse"
+             data-ux-mode="popup"
+             data-auto-prompt="false">            
+        </div>
+        
+        <div class="g_id_signin"
+             data-type="standard"
+             data-shape="rectangular"
+             data-theme="outline">
         </div>
 
         <p ng-hide="active">Current Page</p>
@@ -79,6 +95,18 @@
                 //create dashboard
             }
             document.getElementById('grafanaIframe').src = iframeSource;
+        }
+    </script>
+
+    <script>
+        function handleCredentialsResponse(response){
+            const responsePayload = decodeJwtResponse(response.credential);
+            console.log("ID: "+ responsePayload.sub);
+        }
+
+        function decodeJwtResponse(data){
+            var tokens = data.split(".");
+            return JSON.parse(atob(tokens[1]));
         }
     </script>
 </html>
